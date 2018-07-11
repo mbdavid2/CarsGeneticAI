@@ -1,0 +1,35 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarGeneticAI", "Assembly-CSharp.csproj", "{D69FF9C8-52DC-B123-A811-6473AFF5A101}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarGeneticAI", "Assembly-CSharp-firstpass.csproj", "{0B4F28AA-E49C-95EC-1888-3AFCBDCC0340}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarGeneticAI", "Assembly-CSharp-Editor-firstpass.csproj", "{069355DB-E863-54DE-F925-CAD6F1795E61}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D69FF9C8-52DC-B123-A811-6473AFF5A101}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D69FF9C8-52DC-B123-A811-6473AFF5A101}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D69FF9C8-52DC-B123-A811-6473AFF5A101}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D69FF9C8-52DC-B123-A811-6473AFF5A101}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0B4F28AA-E49C-95EC-1888-3AFCBDCC0340}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B4F28AA-E49C-95EC-1888-3AFCBDCC0340}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B4F28AA-E49C-95EC-1888-3AFCBDCC0340}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B4F28AA-E49C-95EC-1888-3AFCBDCC0340}.Release|Any CPU.Build.0 = Release|Any CPU
+		{069355DB-E863-54DE-F925-CAD6F1795E61}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{069355DB-E863-54DE-F925-CAD6F1795E61}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{069355DB-E863-54DE-F925-CAD6F1795E61}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{069355DB-E863-54DE-F925-CAD6F1795E61}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = Assembly-CSharp.csproj
+	EndGlobalSection
+EndGlobal

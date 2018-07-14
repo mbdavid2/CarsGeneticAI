@@ -18,11 +18,11 @@ public class CarController : MonoBehaviour {
         /*float motor = maxMotorTorque * Input.GetAxis("Vertical");
         float steering = maxSteeringAngle * Input.GetAxis("Horizontal");
         float brake = maxBrakeTorque * Input.GetAxis("Jump");*/
-
+        
         float motor = maxMotorTorque * GetComponent<UnitAI>().getMotor();
         float steering = maxSteeringAngle * GetComponent<UnitAI>().getSteering();
         float brake = maxBrakeTorque * GetComponent<UnitAI>().getBrake();
-            
+        
         foreach (AxleInfo axleInfo in axleInfos) {
             if (axleInfo.steering) {
                 axleInfo.leftWheel.steerAngle = steering;

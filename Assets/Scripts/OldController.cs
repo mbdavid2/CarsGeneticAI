@@ -22,10 +22,10 @@ public class OldController : MonoBehaviour {
 	private float turn;
 	private float brake;
 
-	private Rigidbody rb;
+	//private Rigidbody rb;
 
 	void Start () {
-		rb = GetComponent<Rigidbody>();
+		//rb = GetComponent<Rigidbody>();
 		forward = 0;
 		brake = 0;
 		turn = 0;

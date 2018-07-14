@@ -17,12 +17,26 @@ public class ObstacleDetection : MonoBehaviour {
 
 	private int layerMask;
 
+	private bool ready;
+
 	private void Start() {
 		rayCastDistance = 20f;
 		leftRayBool = false;
 		rightRayBool = false;
 		layerMask = 1 << 8;
 		layerMask = ~layerMask;
+	}
+	
+	public void setRayCastDistance(float newDist) {
+		print("Current: " + rayCastDistance);
+		rayCastDistance = newDist;
+		print("new: " + rayCastDistance);
+	}
+
+	public void setEmittersAngle(float angle) {
+		float each = angle/2;
+		leftEmitter.transform.eulerAngles = new Vector3(0, -each, 0);
+		rightEmitter.transform.eulerAngles = new Vector3(0, each, 0);
 	}
 
 	public bool getLeftRayBool() {

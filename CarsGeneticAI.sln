@@ -1,0 +1,35 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarsGeneticAI", "Assembly-CSharp.csproj", "{4038ECB6-B6DE-3163-A10E-EFD8E07FC5E6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarsGeneticAI", "Assembly-CSharp-firstpass.csproj", "{04346D4F-71F1-513D-7A2B-4236A34F7C6B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarsGeneticAI", "Assembly-CSharp-Editor-firstpass.csproj", "{C3AE4F8A-1251-5B70-C377-F306E1D115A4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4038ECB6-B6DE-3163-A10E-EFD8E07FC5E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4038ECB6-B6DE-3163-A10E-EFD8E07FC5E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4038ECB6-B6DE-3163-A10E-EFD8E07FC5E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4038ECB6-B6DE-3163-A10E-EFD8E07FC5E6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{04346D4F-71F1-513D-7A2B-4236A34F7C6B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{04346D4F-71F1-513D-7A2B-4236A34F7C6B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{04346D4F-71F1-513D-7A2B-4236A34F7C6B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{04346D4F-71F1-513D-7A2B-4236A34F7C6B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C3AE4F8A-1251-5B70-C377-F306E1D115A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C3AE4F8A-1251-5B70-C377-F306E1D115A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C3AE4F8A-1251-5B70-C377-F306E1D115A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C3AE4F8A-1251-5B70-C377-F306E1D115A4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = Assembly-CSharp.csproj
+	EndGlobalSection
+EndGlobal

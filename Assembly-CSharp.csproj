@@ -9,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{D69FF9C8-52DC-B123-A811-6473AFF5A101}</ProjectGuid>
+    <ProjectGuid>{4038ECB6-B6DE-3163-A10E-EFD8E07FC5E6}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -61,9 +61,10 @@
      <Compile Include="Assets\SampleScenes\Scripts\SlowMoButton.cs" />
      <Compile Include="Assets\Scripts\CarController.cs" />
      <Compile Include="Assets\Scripts\DebugScreenInformation.cs" />
-     <Compile Include="Assets\Scripts\dsada.cs" />
      <Compile Include="Assets\Scripts\ObstacleDetection.cs" />
+     <Compile Include="Assets\Scripts\OldController.cs" />
      <Compile Include="Assets\Scripts\UnitAI.cs" />
+     <Compile Include="Assets\Scripts\UnitManager.cs" />
      <Compile Include="Assets\Scripts\UnitStats.cs" />
      <None Include="Assets\SampleScenes\Shaders\Skybox-Procedural.shader" />
  <Reference Include="UnityEngine.UI">
@@ -156,7 +157,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
-      <Project>{0B4F28AA-E49C-95EC-1888-3AFCBDCC0340}</Project>      <Name>Assembly-CSharp-firstpass</Name>    </ProjectReference>
+      <Project>{04346D4F-71F1-513D-7A2B-4236A34F7C6B}</Project>      <Name>Assembly-CSharp-firstpass</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

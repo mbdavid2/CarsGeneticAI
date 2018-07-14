@@ -10,7 +10,7 @@ public class UnitStats : MonoBehaviour {
 	private float elapsedTime;
 
 	private void Start () {
-		coveredDistance = -75;
+		coveredDistance = -75f; //TODO: hardcode
 		elapsedTime = 0;
 		startTime = Time.time;
 	}
@@ -32,8 +32,8 @@ public class UnitStats : MonoBehaviour {
 		calculateElapsedTime();
 	}
 
-	private void resetCounters () {
-		coveredDistance = -75;
+	public void resetCounters () {
+		coveredDistance = -35.4f; //TODO: Hardcode 2: tokyo drift
 		elapsedTime = 0;
 		startTime = Time.time;
 	}

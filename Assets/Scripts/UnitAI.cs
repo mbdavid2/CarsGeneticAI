@@ -4,7 +4,7 @@ using System.Collections.Generic;
     
 public class UnitAI : MonoBehaviour {
 
-    private int[] unitCodification;
+    
     private float steering;
     private float motor;
     private float brake;
@@ -16,11 +16,11 @@ public class UnitAI : MonoBehaviour {
         motor = 0;
         brake = 0;
     }
-    
-    private void checkDominant(bool left, bool right) {
-    	if (left && !right) dominant = 0;
-    	if (!left && right) dominant = 1;
-    	else dominant = 2;
+
+    public void resetUnit() {
+    	steering = 0;
+        motor = 0;
+        brake = 0;
     }
 
     private void detectedRightTurnLeft() {
@@ -31,12 +31,9 @@ public class UnitAI : MonoBehaviour {
     	sendMovement(1,0,1,0);
     }
 
-    private void FixedUpdate() {
-        bool rightRayBool = GetComponent<ObstacleDetection>().getRightRayBool();
+    private void basicAI() {
+    	bool rightRayBool = GetComponent<ObstacleDetection>().getRightRayBool();
         bool leftRayBool = GetComponent<ObstacleDetection>().getLeftRayBool();
-
-        print("left ray: " + leftRayBool);
-        print("right ray: " + rightRayBool);
 
         if (rightRayBool && leftRayBool) {
         	//checkDominant(leftRayBool ,rightRayBool);
@@ -58,6 +55,10 @@ public class UnitAI : MonoBehaviour {
         }
     }
 
+    private void FixedUpdate() {
+        basicAI();
+    }
+
     private void sendMovement(float rightSteerAmount, float leftSteerAmount, float moveAmount, float brakeAmount) {
         //Now simply steer/move/break
         //Based on the amounts it should do something like steer - wait amount - steer - wait. etc
@@ -68,7 +69,7 @@ public class UnitAI : MonoBehaviour {
         	steering = -leftSteerAmount;
         }
         motor = moveAmount;
-        brake = brakeAmount; 
+        //brake = brakeAmount; 
     }
 
     public float getSteering() {
@@ -81,5 +82,13 @@ public class UnitAI : MonoBehaviour {
 
     public float getBrake() {
         return brake;
+    }
+
+    public void stop() {
+    	GetComponent<Rigidbody>().velocity = Vector3.zero;
+        GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
+    	brake = 1; 
+    	motor = 0;
+    	steering = 0;
     }
 }

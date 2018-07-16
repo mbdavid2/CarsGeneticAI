@@ -61,6 +61,7 @@
      <Compile Include="Assets\SampleScenes\Scripts\SlowMoButton.cs" />
      <Compile Include="Assets\Scripts\CarController.cs" />
      <Compile Include="Assets\Scripts\DebugScreenInformation.cs" />
+     <Compile Include="Assets\Scripts\GeneticManager.cs" />
      <Compile Include="Assets\Scripts\ObstacleDetection.cs" />
      <Compile Include="Assets\Scripts\OldController.cs" />
      <Compile Include="Assets\Scripts\UnitAI.cs" />

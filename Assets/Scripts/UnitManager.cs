@@ -5,25 +5,20 @@ using UnityEngine;
 public class UnitManager : MonoBehaviour {
 
 	private int[] unitCodification;
+
 	public Rigidbody rb;
 
-	private void OnCollisionEnter(Collision collision) {
-        if (collision.gameObject.name == "GroundTrackVerges") {
-        	GetComponent<UnitAI>().stop();
-        	initUnit();
-        }
-	}
-
 	private void Start() {
-    	initUnit();
+		unitCodification = new int[] {0, 1, 3, 3, 3, 4, 5 };
+    	//initNewUnit();
     }
 
-    private void initUnit() {
+    private void initNewUnit() {
     	//Basic
     	prepareCarStartPosition();
 
     	//Genetic
-    	unitCodification = new int[] {3, 1, 3, 3, 3, 4, 5 };
+    	unitCodification = GetComponent<GeneticManager>().getNewUnitCodification();
     	initParameters(unitCodification);
     	
     	GetComponent<UnitStats>().resetCounters(); //Resets time, distance, etc
@@ -55,16 +50,28 @@ public class UnitManager : MonoBehaviour {
     }
 
     /*
-    Sets the maximum reach of the ray. 
-    	Code = 3;
-    	RayCastDistance = 30f;
+    Sets the maximum reach of the ray. Example:
+    	Code = 3; -> RayCastDistance = 30f;
     */
     private void setRayDistance(int code) {
     	GetComponent<ObstacleDetection>().setRayCastDistance(code*10);
     }
 
+    private void OnCollisionEnter(Collision collision) {
+        if (collision.gameObject.name == "GroundTrackVerges") {
+        	GetComponent<UnitAI>().stop();
+        	storeUnitData();
+        	initNewUnit();
+        }
+	}
 
-        /*
+	private void storeUnitData() {
+		float d = GetComponent<UnitStats>().getCoveredDistance();
+		float t = GetComponent<UnitStats>().getElapsedTime();
+        GetComponent<GeneticManager>().addNewUnitResults(unitCodification, d, t);
+	}
+
+    /*
 	Collision detected, destroy the gameobject record the unit stats
     */
     public void gameOver() {

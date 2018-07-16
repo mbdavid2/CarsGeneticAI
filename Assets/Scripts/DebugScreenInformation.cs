@@ -3,7 +3,6 @@ using UnityEngine.UI;
 
 public class DebugScreenInformation : MonoBehaviour
 {
-    private int avgFrameRate;
     public Text displayTime;
 	public Text displayDistance;
 	public Text unitNumber;
@@ -17,8 +16,9 @@ public class DebugScreenInformation : MonoBehaviour
  	private void Update () {
  		string time = GetComponent<UnitStats>().getElapsedTime().ToString("#.00");
  		string distance = GetComponent<UnitStats>().getCoveredDistance().ToString("#.00");
+ 		int currentN = GetComponent<GeneticManager>().getUnitNumber();
 		displayTime.text = "Elapsed time: " + time;
 		displayDistance.text = "Distance: " + distance;
-		unitNumber.text = "Unit #1";
+		unitNumber.text = "Unit #" + currentN;
     }
 }

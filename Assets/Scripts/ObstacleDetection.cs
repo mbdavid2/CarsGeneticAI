@@ -20,7 +20,7 @@ public class ObstacleDetection : MonoBehaviour {
 	private bool ready;
 
 	private void Start() {
-		rayCastDistance = 20f;
+		rayCastDistance = 10f;
 		leftRayBool = false;
 		rightRayBool = false;
 		layerMask = 1 << 8;
@@ -29,7 +29,7 @@ public class ObstacleDetection : MonoBehaviour {
 	
 	public void setRayCastDistance(float newDist) {
 		print("Current: " + rayCastDistance);
-		rayCastDistance = newDist;
+		rayCastDistance = newDist; //TODO: fix this!!!!
 		print("new: " + rayCastDistance);
 	}
 

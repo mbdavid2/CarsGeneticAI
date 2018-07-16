@@ -10,13 +10,13 @@ public class UnitStats : MonoBehaviour {
 	private float elapsedTime;
 
 	private void Start () {
-		coveredDistance = -75f; //TODO: hardcode
+		coveredDistance = 0;
+		lastPosition = transform.position;
 		elapsedTime = 0;
 		startTime = Time.time;
 	}
 
 	private void calculateCoveredDistance () {
-		//float dir = Input.GetAxis("Vertical");
 		Vector3 currPosition = transform.position;
 		float inner = Mathf.Pow(currPosition.x - lastPosition.x, 2) + Mathf.Pow(currPosition.y - lastPosition.y, 2) + Mathf.Pow(currPosition.z - lastPosition.z, 2);
 		coveredDistance += Mathf.Sqrt(inner);
@@ -33,7 +33,8 @@ public class UnitStats : MonoBehaviour {
 	}
 
 	public void resetCounters () {
-		coveredDistance = -35.4f; //TODO: Hardcode 2: tokyo drift
+		coveredDistance = 0;
+		lastPosition = transform.position;
 		elapsedTime = 0;
 		startTime = Time.time;
 	}

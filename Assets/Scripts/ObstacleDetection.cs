@@ -28,9 +28,9 @@ public class ObstacleDetection : MonoBehaviour {
 	}
 	
 	public void setRayCastDistance(float newDist) {
-		print("Current: " + rayCastDistance);
+		//print("Current: " + rayCastDistance);
 		rayCastDistance = newDist; //TODO: fix this!!!!
-		print("new: " + rayCastDistance);
+		//print("new: " + rayCastDistance);
 	}
 
 	public void setEmittersAngle(float angle) {

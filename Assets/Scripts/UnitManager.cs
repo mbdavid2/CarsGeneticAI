@@ -9,8 +9,7 @@ public class UnitManager : MonoBehaviour {
 	public Rigidbody rb;
 
 	private void Start() {
-		unitCodification = new int[] {0, 1, 3, 3, 3, 4, 5 };
-    	//initNewUnit();
+    	initNewUnit();
     }
 
     private void initNewUnit() {
@@ -40,6 +39,7 @@ public class UnitManager : MonoBehaviour {
     	setAngle(angle);
     	int dist = unitCodification[1];
     	setRayDistance(dist);
+    	print("This unit has angle: " + angle + ", distance detection: " + dist);
     }
     
     /*
@@ -68,7 +68,7 @@ public class UnitManager : MonoBehaviour {
 	private void storeUnitData() {
 		float d = GetComponent<UnitStats>().getCoveredDistance();
 		float t = GetComponent<UnitStats>().getElapsedTime();
-        GetComponent<GeneticManager>().addNewUnitResults(unitCodification, d, t);
+        GetComponent<GeneticManager>().addNewUnitResults(d, t);
 	}
 
     /*

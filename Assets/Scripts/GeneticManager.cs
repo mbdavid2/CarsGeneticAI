@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,6 +9,7 @@ public class GeneticManager : MonoBehaviour {
         public int[] unitCodification;
         public float coveredDistance;
         public float elapsedTime;
+        public float heuristic;
     }
 
     private int currentN;
@@ -28,27 +29,37 @@ public class GeneticManager : MonoBehaviour {
 		createInitialGeneration();
 	}
 
+	private float computeUnitHeuristic(UnitData unit) {
+		return (0.75f*unit.coveredDistance + 0.25f*unit.elapsedTime)/100;
+	}
+
 	public void addNewUnitResults(float dist, float eTime) {
 		UnitData tmp = (UnitData)currentGeneration[currentN];
 		tmp.coveredDistance = dist;
 		tmp.elapsedTime = eTime;
+		tmp.heuristic = computeUnitHeuristic(tmp);
 		//tmp.number = currentN;
 		currentGeneration[currentN] = tmp;
 		debugUnit((UnitData) currentGeneration[currentN]);
 		currentN++;
 	}
 
+	private int[] generateRandomInitialUnit() {
+		//Provisional
+		int dist = Random.Range(0,4);
+		int angle = Random.Range(0,4);
+		//////////
+		int[] codification = new int[] {dist, angle, 3, 3, 3, 4, 5 };
+		return codification;
+	}
+
 	public void createInitialGeneration() {
 		for (int i = 0; i < maxUnitsPerGeneration; i++) {
 			UnitData tmp;
-			//Provisional
-			int dist = Random.Range(0,4);
-			int angle = Random.Range(0,4);
-			//////////
-			int[] codification = new int[] {dist, angle, 3, 3, 3, 4, 5 };
-			tmp.unitCodification = codification;
+			tmp.unitCodification = generateRandomInitialUnit();
 			tmp.coveredDistance = -1;
 			tmp.elapsedTime = -1;
+			tmp.heuristic = -1f;
 			tmp.number = i;
 			currentGeneration.Add(tmp);
 		}

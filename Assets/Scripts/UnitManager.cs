@@ -39,7 +39,7 @@ public class UnitManager : MonoBehaviour {
     	setAngle(angle);
     	int dist = unitCodification[1];
     	setRayDistance(dist);
-    	print("This unit has angle: " + angle + ", distance detection: " + dist);
+    	//print("This unit has angle: " + angle + ", distance detection: " + dist);
     }
     
     /*
@@ -76,5 +76,14 @@ public class UnitManager : MonoBehaviour {
     */
     public void gameOver() {
     	print("Dead");
+    }
+
+    private void Update() {
+    	//Debugging
+    	if (Input.GetKeyDown(KeyCode.T)) {
+	    	GetComponent<UnitAI>().stop();
+	        storeUnitData();
+	        initNewUnit();
+    	}
     }
 }

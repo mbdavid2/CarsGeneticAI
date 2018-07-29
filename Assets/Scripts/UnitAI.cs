@@ -37,9 +37,9 @@ public class UnitAI : MonoBehaviour {
 
         if (rightRayBool && leftRayBool) {
         	//checkDominant(leftRayBool ,rightRayBool);
-        	sendMovement(0,0,0,1);
-        	if (last == 0) detectedRightTurnLeft();
-        	else if (last == 1) detectedLeftTurnRight();
+        	//sendMovement(0,0,0,1);
+        	if (last == 1) detectedRightTurnLeft();
+        	else if (last == 0) detectedLeftTurnRight();
         	else sendMovement(0,0,1,0);
         }
         else if (rightRayBool && !leftRayBool) {

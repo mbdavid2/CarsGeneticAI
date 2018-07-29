@@ -25,7 +25,7 @@ public class GeneticManager : MonoBehaviour {
 	private void initGenetic() {
 		currentN = 0;
 		generationN = 0;
-		maxUnitsPerGeneration = 3;
+		maxUnitsPerGeneration = 5;
 		createInitialGeneration();
 	}
 
@@ -37,10 +37,11 @@ public class GeneticManager : MonoBehaviour {
 		UnitData tmp = (UnitData)currentGeneration[currentN];
 		tmp.coveredDistance = dist;
 		tmp.elapsedTime = eTime;
-		tmp.heuristic = computeUnitHeuristic(tmp);
+		//tmp.heuristic = computeUnitHeuristic(tmp);
+		tmp.heuristic = Random.Range(0,400);
 		//tmp.number = currentN;
 		currentGeneration[currentN] = tmp;
-		debugUnit((UnitData) currentGeneration[currentN]);
+		printUnit((UnitData) currentGeneration[currentN]);
 		currentN++;
 	}
 
@@ -49,36 +50,102 @@ public class GeneticManager : MonoBehaviour {
 		int dist = Random.Range(0,4);
 		int angle = Random.Range(0,4);
 		//////////
-		int[] codification = new int[] {dist, angle, 3, 3, 3, 4, 5 };
+		int[] codification = new int[] {dist, angle, dist, angle, dist, angle, dist};
 		return codification;
 	}
 
 	public void createInitialGeneration() {
 		for (int i = 0; i < maxUnitsPerGeneration; i++) {
-			UnitData tmp;
-			tmp.unitCodification = generateRandomInitialUnit();
-			tmp.coveredDistance = -1;
-			tmp.elapsedTime = -1;
-			tmp.heuristic = -1f;
-			tmp.number = i;
+			UnitData tmp = createNewUnit(generateRandomInitialUnit(), i);
 			currentGeneration.Add(tmp);
 		}
 	}
 
-	private void finishGeneration() {
+	private UnitData createNewUnit(int[] codification, int numberID) {
+		UnitData tmp;
+		tmp.unitCodification = codification;
+		tmp.coveredDistance = -1;
+		tmp.elapsedTime = -1;
+		tmp.heuristic = -1f;
+		tmp.number = numberID;
+		return tmp;
+	}
 
+	private ArrayList sortUnits() {
+		/*for (int j = 0; j < currentGeneration.Count; j++) {
+			print(j + " -> Score: " + ((UnitData)currentGeneration[j]).heuristic);
+		}*/
+		//Insertion sort for a small input
+		ArrayList orderedGeneration = new ArrayList();
+		orderedGeneration.Add((UnitData)currentGeneration[0]);
+		for (int i = 1; i < currentGeneration.Count; i++) {
+			UnitData unit = ((UnitData)currentGeneration[i]);
+			//Insert
+			bool found = false;
+			for (int j = 0; j < orderedGeneration.Count; j++) {
+				UnitData aux = ((UnitData)orderedGeneration[j]);
+				if (unit.heuristic > aux.heuristic) {
+					orderedGeneration.Insert(j, unit);
+					found = true;
+					break;
+				}
+			}
+			if (!found) {
+				orderedGeneration.Insert(orderedGeneration.Count, unit);
+			}
+		}
+		/*for (int j = 0; j < orderedGeneration.Count; j++) {
+			print(j + " -> Score: " + ((UnitData)orderedGeneration[j]).heuristic);
+		}*/
+		return orderedGeneration;
+	}
+
+	private UnitData crossUnits(int[] codificationA, int[] codificationB, int numberID) {
+		int[] codification = new int[codificationA.Length];
+		for (int i = 0; i < codificationA.Length; i++) {
+			if (i < codificationA.Length/2) codification[i] = codificationA[i];
+			else codification[i] = codificationB[i];
+		}
+		//int[] codification = new int[] {0, 0, 0, 0, 0, 0, 0};
+		UnitData tmp = createNewUnit(codification, numberID);
+		return tmp;
+	}
+
+	private void finishGeneration() {
+		ArrayList orderedGeneration = sortUnits();
+		printGeneration(orderedGeneration);
+
+		//Only the first half is kept -> both as it is and crossed with another one
+		currentGeneration = new ArrayList();
+		int nUnits = orderedGeneration.Count/2;
+		for (int i = 0; i < nUnits; i++) {
+			//Untouched
+			int[] codificationA = ((UnitData)orderedGeneration[i]).unitCodification;
+			UnitData unitA = createNewUnit(codificationA, i);
+			currentGeneration.Add(unitA);
+
+			int[] codificationB = ((UnitData)orderedGeneration[i+1]).unitCodification;
+			UnitData newUnit = crossUnits(codificationA, codificationB, orderedGeneration.Count - i - 1);
+			currentGeneration.Add(newUnit);
+			
+			if (orderedGeneration.Count%2 != 0 && i == nUnits - 1) {
+				int[] codificationExtra = ((UnitData)orderedGeneration[i+1]).unitCodification;
+				UnitData unitE = createNewUnit(codificationExtra, orderedGeneration.Count/2);
+				currentGeneration.Add(unitE);
+			}
+		}
+		printGeneration(currentGeneration);
 	}
 
 	public int[] getNewUnitCodification() {
 		//Test
-		/*if (currentN > currentGeneration.Count) {
+		if (currentN > currentGeneration.Count-1 && currentGeneration.Count > 0) {
 			finishGeneration();
 			currentN = 0;
 			generationN++;
-			return getNewUnitCodification(); //Uyyyyy
+			return getNewUnitCodification();
 		}
-		else {*/
-		if (currentGeneration.Count == 0) {
+		else if (currentGeneration.Count == 0) {
 			print("No generation, creating one");
 			initGenetic();
 			return getNewUnitCodification();
@@ -87,17 +154,34 @@ public class GeneticManager : MonoBehaviour {
 			UnitData unit = ((UnitData)currentGeneration[currentN]);
 			return unit.unitCodification;
 		}
-		//}
-		
 	}
 
 	public int getUnitNumber() {
 		return currentN;
 	}
 
-	private void debugUnit(UnitData unit) {
-		print("Number: " + unit.number);
+	private void printUnit(UnitData unit) {
+		/*print("Number: " + unit.number);
 		print("Time: " + unit.elapsedTime.ToString("#.00"));
-		print("Distance: " + unit.coveredDistance.ToString("#.00"));
+		print("Distance: " + unit.coveredDistance.ToString("#.00"));*/
+	}
+
+	private void printGeneration(ArrayList generation) {
+		print("Printing generation:" + currentGeneration.Count + " units");
+		for (int i = 0; i < generation.Count; i++) {
+			print("Unit #" + ((UnitData)generation[i]).number +
+				" C: " + getCodification(((UnitData)generation[i]).unitCodification) + 
+				" P: " + ((UnitData)generation[i]).heuristic + 
+				" D: " + ((UnitData)generation[i]).coveredDistance +
+				" T: " + ((UnitData)generation[i]).elapsedTime);
+		}
+	} 
+
+	private string getCodification(int[] unitCodification) {
+		string cod = "";
+		for (int i = 0; i < unitCodification.Length; i++) {
+			cod += unitCodification[i];
+		}
+		return cod;
 	}
 }

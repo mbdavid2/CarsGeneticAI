@@ -25,7 +25,7 @@ public class GeneticManager : MonoBehaviour {
 	private void initGenetic() {
 		currentN = 0;
 		generationN = 0;
-		maxUnitsPerGeneration = 5;
+		maxUnitsPerGeneration = 10;
 		createInitialGeneration();
 	}
 
@@ -47,10 +47,15 @@ public class GeneticManager : MonoBehaviour {
 
 	private int[] generateRandomInitialUnit() {
 		//Provisional
-		int dist = Random.Range(0,4);
-		int angle = Random.Range(0,4);
-		//////////
-		int[] codification = new int[] {dist, angle, dist, angle, dist, angle, dist};
+		int dist = Random.Range(1,5);
+		int angle = Random.Range(0,5);
+		int brake = Random.Range(0,10);
+		int velocity = Random.Range(1,1);
+		int brakeTime = Random.Range(1,25);
+		/*int brake = 9;
+		int brakeTime = 500;
+		*///////////
+		int[] codification = new int[] {angle, dist, brake, brakeTime, velocity, angle, dist};
 		return codification;
 	}
 
@@ -111,6 +116,15 @@ public class GeneticManager : MonoBehaviour {
 		return tmp;
 	}
 
+	//Randomly alter one of its parameters
+	private int[] mutateUnit(int[] codification) {
+		int ran = Random.Range(0, codification.Length-1);
+		int angle = 0;
+		int dist = 0;
+		int[] mCodification = new int[] {angle, dist, dist, angle, dist, angle, dist};
+		return mCodification;
+	}
+
 	private void finishGeneration() {
 		ArrayList orderedGeneration = sortUnits();
 		printGeneration(orderedGeneration);
@@ -130,7 +144,8 @@ public class GeneticManager : MonoBehaviour {
 			
 			if (orderedGeneration.Count%2 != 0 && i == nUnits - 1) {
 				int[] codificationExtra = ((UnitData)orderedGeneration[i+1]).unitCodification;
-				UnitData unitE = createNewUnit(codificationExtra, orderedGeneration.Count/2);
+				int[] mutatedCodification = mutateUnit(codificationExtra);
+				UnitData unitE = createNewUnit(mutatedCodification, orderedGeneration.Count/2);
 				currentGeneration.Add(unitE);
 			}
 		}

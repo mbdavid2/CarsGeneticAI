@@ -37,9 +37,26 @@ public class UnitManager : MonoBehaviour {
     private void initParameters(int[] unitCodification) {
     	int angle = unitCodification[0];
     	setAngle(angle);
+
     	int dist = unitCodification[1];
     	setRayDistance(dist);
-    	//print("This unit has angle: " + angle + ", distance detection: " + dist);
+
+    	int brake = unitCodification[2];
+    	int brakeTime = unitCodification[3];
+    	setBrakeParameters(brake, brakeTime);
+
+    	int velocity = unitCodification[4];
+    	setVelocity(velocity);
+
+    	GetComponent<DebugScreenInformation>().debugUnitInformationConsole(unitCodification);
+    }
+
+	private void setVelocity(int vel) {
+    	GetComponent<UnitAI>().setUnitVelocity(vel);
+    }
+
+    private void setBrakeParameters(int brake, int brakeTime) {
+    	GetComponent<UnitAI>().setUnitBrake(brake*10, brakeTime);
     }
     
     /*
@@ -72,15 +89,18 @@ public class UnitManager : MonoBehaviour {
 	}
 
     /*
-	Collision detected, destroy the gameobject record the unit stats
+	Spends too much time doing nothing
     */
-    public void gameOver() {
-    	print("Dead");
+    private bool gameOver() {
+    	float d = GetComponent<UnitStats>().getCoveredDistance();
+		float t = GetComponent<UnitStats>().getElapsedTime();
+		//print("Vel: " + GetComponent<Rigidbody>().angularVelocity.magnitude*3.6);
+    	return (t >= 3 && GetComponent<Rigidbody>().angularVelocity.magnitude < 0.05); //TODO: fix this
     }
 
     private void Update() {
     	//Debugging
-    	if (Input.GetKeyDown(KeyCode.T)) {
+    	if (Input.GetKeyDown(KeyCode.T) || gameOver()) {
 	    	GetComponent<UnitAI>().stop();
 	        storeUnitData();
 	        initNewUnit();

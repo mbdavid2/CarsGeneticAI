@@ -46,9 +46,10 @@ public class UnitManager : MonoBehaviour {
     	setBrakeParameters(brake, brakeTime);
 
     	int velocity = unitCodification[4];
-    	setVelocity(velocity);
+    	setVelocity(velocity);  
 
-    	GetComponent<DebugScreenInformation>().debugUnitInformationConsole(unitCodification);
+    	GetComponent<DebugScreenInformation>().debugUnitInformationScreen(unitCodification); 
+    	//TODO: check if the GUI debugger works
     }
 
 	private void setVelocity(int vel) {
@@ -95,7 +96,7 @@ public class UnitManager : MonoBehaviour {
     	float d = GetComponent<UnitStats>().getCoveredDistance();
 		float t = GetComponent<UnitStats>().getElapsedTime();
 		//print("Vel: " + GetComponent<Rigidbody>().angularVelocity.magnitude*3.6);
-    	return (t >= 3 && GetComponent<Rigidbody>().angularVelocity.magnitude < 0.05); //TODO: fix this
+    	return false; //(t >= 3 && GetComponent<Rigidbody>().angularVelocity.magnitude < 0.05); //TODO: fix this
     }
 
     private void Update() {
